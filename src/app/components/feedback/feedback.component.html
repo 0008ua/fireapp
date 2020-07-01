@@ -1,0 +1,84 @@
+<div class="feedback">
+<div class="container">
+
+  <div class="row" fxLayout="column" fxLayout.gt-xs="row">
+    <div fxFlex.gt-xs="10" fxFlex.gt-md="25"></div>
+
+    <div class="cell" fxFlex.gt-xs="80" fxFlex.gt-md="50">
+      <form #fForm="ngForm" [formGroup]="feedbackForm">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>
+              Feedback
+
+            </mat-card-title>
+          </mat-card-header>
+
+          <mat-card-content>
+            <div class="row" fxLayout="row">
+              <div class="cell" fxFlexAlign="center">
+                <mat-icon color="primary">textsms</mat-icon>
+              </div>
+              <mat-form-field class="cell" fxFlex>
+                <textarea rows="5" matInput placeholder="Повідомлення" formControlName="message" required></textarea>
+                <mat-error *ngIf="(feedbackForm.get('message').errors?.minlength ||
+                                    feedbackForm.get('message').errors?.maxlength ||
+                                    feedbackForm.get('message').errors?.required) &&
+                                    feedbackForm.get('message').touched">
+                  Довжина повинна бути від 3 до 500 символів
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="row" fxLayout="row">
+              <div class="cell" fxFlexAlign="center">
+                <mat-icon color="primary">account_circle</mat-icon>
+              </div>
+              <mat-form-field class="cell" fxFlex>
+                <input matInput placeholder="Ваше ім'я" formControlName="name" required>
+                <mat-error *ngIf="feedbackForm.get('contacts').errors?.required &&
+                        feedbackForm.get('name').touched">
+                  Введіть ім'я
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="row" fxLayout="row">
+              <div class="cell" fxFlexAlign="center">
+                <mat-icon color="primary">contacts</mat-icon>
+              </div>
+              <mat-form-field class="cell" fxFlex>
+                <input matInput placeholder="Контактний номер або email" formControlName="contacts" required>
+                <mat-error *ngIf="feedbackForm.get('contacts').errors?.required &&
+                        feedbackForm.get('contacts').touched">
+                  Введіть котактну інформацію
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <!-- <re-captcha [ngClass]="{'display-none':
+          !feedbackForm.get('contacts').valid || !feedbackForm.get('contacts').valid ||
+          !feedbackForm.get('message').valid}" [formControlName]="'recaptcha'" #recaptchaRef
+                siteKey="{{config.recaptchaSiteKey}}">
+              </re-captcha> -->
+
+
+
+          </mat-card-content>
+          <mat-card-actions fxLayoutAlign="center">
+            <button mat-raised-button color="primary" aria-label="Send message" type="button"
+              [disabled]="!feedbackForm.valid || processing" (click)="onFeedbackFormSubmit()">
+              <mat-icon *ngIf="!processing">message</mat-icon> Send
+            </button>
+            <!-- <button mat-button aria-label="Back" type="button" (click)="navHome()">
+              <mat-icon>home</mat-icon> Go to main page
+            </button> -->
+          </mat-card-actions>
+        </mat-card>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+
+</div>

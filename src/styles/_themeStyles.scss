@@ -1,0 +1,434 @@
+@import "./material";
+
+// current theme styles (dark or light)
+
+// get variables from current theme (dark or light)
+$primary: map-get($main-theme, primary);
+$accent: map-get($main-theme, accent);
+$warn: map-get($main-theme, warn);
+$foreground: map-get($main-theme, foreground);
+$background: map-get($main-theme, background);
+
+// set custom variables
+$muted: mat-color($foreground, secondary-text);
+$muted-strong: mat-color($foreground, disabled-text);
+$background-lighter: mat-color($background, background) !important;
+$background-darker: mat-color($background, status-bar) !important;
+
+$outerSpace: #424651;
+$independece: rgb(74, 78, 105);
+$romanSilver: #848c8e;
+$glitter: #e7ecef;
+$babyPowder: #fbfefb;
+$incomingMsg: #acc0d8;
+$outgoingMsg: #cccccc;
+
+html {
+  font-size: 16px;
+  font-family: $mainFontFamily;
+}
+
+.muted {
+  color: $muted;
+}
+
+.primary {
+  color: mat-color($primary);
+}
+
+.accent {
+  color: mat-color($accent);
+}
+
+a,
+a:visited,
+a:hover,
+a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.margin-0 {
+  margin: 0;
+}
+
+$space-gt-md: 12px;
+$space-md: 12px;
+$space-sm: 8px;
+$space-xs: 8px;
+
+.container {
+  @include gt-md {
+    padding: $space-gt-md;
+  }
+  @include md {
+    padding: $space-md;
+  }
+  @include sm {
+    padding: $space-sm;
+  }
+  @include xs {
+    // padding: 8px 0;
+    padding: $space-xs;
+  }
+
+  &_column {
+    height: 100%;
+  }
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+
+  @include gt-md {
+    margin: -($space-gt-md);
+  }
+  @include md {
+    margin: -($space-md);
+  }
+  @include sm {
+    margin: -($space-sm);
+  }
+  @include xs {
+    // margin: -8px 0;
+    margin: -($space-xs);
+  }
+}
+
+.column {
+  display: flex;
+  // flex-wrap: wrap;
+
+  @include gt-md {
+    margin: -($space-gt-md);
+    height: calc(100% + (2 * #{$space-gt-md}));
+  }
+  @include md {
+    margin: -($space-md);
+    height: calc(100% + (2 * #{$space-md}));
+  }
+  @include sm {
+    margin: -($space-sm);
+    height: calc(100% + (2 * #{$space-sm}));
+  }
+  @include xs {
+    margin: -($space-xs);
+    height: calc(100% + (2 * #{$space-xs}));
+  }
+}
+
+.cell {
+  @include gt-md {
+    padding: $space-gt-md;
+  }
+  @include md {
+    padding: $space-md;
+  }
+  @include sm {
+    padding: $space-sm;
+  }
+  @include xs {
+    // padding: 8px 0;
+    padding: $space-xs;
+  }
+}
+
+.item {
+  @include gt-md {
+    @include first {
+      padding-left: 0;
+    }
+    @include last {
+      padding-right: 0;
+    }
+    padding: 0 $space-gt-md;
+  }
+  @include md {
+    @include first {
+      padding-left: 0;
+    }
+    @include last {
+      padding-right: 0;
+    }
+    padding: 0 $space-md;
+  }
+  @include sm {
+    @include first {
+      padding-left: 0;
+    }
+    @include last {
+      padding-right: 0;
+    }
+    padding: 0 $space-sm;
+  }
+  @include xs {
+    padding: 0;
+    // padding: 0 8px;
+  }
+}
+
+.header {
+  z-index: 2;
+  position: fixed;
+  width: 100%;
+  height: 4rem;
+  @include lt-md {
+    height: 2.5rem;
+  }
+  background-color: rgba(mat-color($background, background), 0.8);
+  padding: 0 20px;
+  &__item {
+    padding: 0 15px;
+  }
+}
+
+.nav {
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  list-style: none;
+  padding-inline-start: 0;
+  display: flex;
+  &__item {
+    height: 100%;
+    align-items: center; // vertical align
+    display: flex;
+  }
+  &__icon {
+    height: 100%;
+    flex: 0 0 50px;
+    min-width: 50px;
+    display: flex;
+    align-items: center; // vertical align
+    justify-content: center; // horizontal align
+    padding-right: 5px;
+    img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+    }
+    &_small {
+      img {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+      }
+      flex: 0 0 30px;
+      min-width: 30px;
+    }
+  }
+  &__text {
+    height: 100%;
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center; // vertical align
+    justify-content: flex-start; // horizontal align
+    padding-right: 5px;
+  }
+}
+
+.nav_type_header {
+  flex-direction: row;
+  .nav {
+    &__item {
+      padding: 0 5px;
+      flex: 1 1 auto;
+      color: mat-color($primary);
+      &:hover {
+        color: mat-color($primary, 900);
+      }
+      &_active {
+        color: mat-color($primary, 300);
+      }
+    }
+  }
+}
+
+.nav_type_aside {
+  flex-direction: column;
+
+  height: 100%;
+  align-content: space-around;
+  .nav {
+    &__item {
+      // flex: 1 1 auto;
+      height: 45px;
+      color: mat-color($primary);
+      &:hover {
+        color: mat-color($primary, 900);
+      }
+      &_active {
+        color: mat-color($primary, 300);
+      }
+    }
+  }
+}
+
+.aside {
+  z-index: 2;
+  position: fixed;
+  height: 100vh;
+  &__nav {
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 0;
+    @include transition(width 1s);
+    padding: 4.5rem 0 4rem 0;
+    flex-direction: column;
+    align-content: space-around;
+    height: 100%;
+    background-color: rgba(mat-color($background, background), 0.8);
+    &_popup {
+      width: 200px;
+    }
+  }
+  &__button {
+    padding: 0 3px;
+    height: 40px;
+    background-color: rgba(mat-color($background, background), 0.9);
+    display: flex;
+    align-items: center; // vertical align
+    justify-content: center; // horizontal align
+    @include transition(height 1s);
+    @include radius(0 5px 5px 0);
+    &_popup {
+      height: 100%;
+      @include radius(0);
+    }
+  }
+}
+
+.feedback, .profile {
+  padding: 4.5rem 100px 0 100px;
+  @include lt-md {
+    padding: 3rem 1rem 0 1rem;
+  }
+  min-height: 100vh;
+}
+
+.homepage {
+  &__section {
+    padding: 4.5rem 100px 0 100px;
+    @include lt-md {
+      padding: 3rem 1rem 0 1rem;
+    }
+    min-height: 100vh;
+    background-color: $background-lighter;
+    &:nth-child(even) {
+      background-color: $background-darker;
+    }
+    &_start {
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%),
+        url("/assets/logo2.jpg") center center / cover no-repeat #fff;
+    }
+  }
+}
+
+.gallery {
+  &__item {
+    padding: 2rem;
+    @include xs {
+      padding: 2rem 0;
+    }
+  }
+  &__image {
+    height: auto;
+    max-width: 100%;
+  }
+}
+
+.responsive-image {
+  height: auto;
+  max-width: 100%;
+}
+
+.chat {
+  background-color: rgba(mat-color($background, app-bar), 0.9);
+  z-index: 5;
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  width: 400px;
+  height: 70%;
+  max-height: 70%;
+
+  @include radius(16px 8px 8px 16px);
+  // border: 2px solid mat-color($background, status-bar) !important;
+
+  $chat__header-height: 32px;
+  $chat__footer-height: 64px;
+  $chat__main-height: calc(100% - ($chat__header-height + $chat__footer-height));
+
+  &__header {
+    @include gt-md {
+      flex: 0 0 $chat__main-height;
+    }
+    @include md {
+      flex: 0 0 $chat__main-height;
+    }
+    @include sm {
+      flex: 0 0 $chat__main-height;
+    }
+    @include xs {
+      flex: 0 0 $chat__main-height;
+    }
+  }
+  &__main {
+    @include gt-md {
+      flex: 0 0 calc(chat__footer-height + (2 * #{$space-gt-md}));
+    }
+    @include md {
+      flex: 0 0 calc(chat__footer-height + (2 * #{$space-md}));
+    }
+    @include sm {
+      flex: 0 0 calc(chat__footer-height + (2 * #{$space-sm}));
+    }
+    @include xs {
+      flex: 0 0 calc(chat__footer-height + (2 * #{$space-xs}));
+    }
+    background-color: mat-color($background, status-bar);
+    overflow: auto;
+  }
+
+  &__footer {
+    @include gt-md {
+      flex: 0 0 calc(chat__footer-height + (2 * #{$space-gt-md}));
+    }
+    @include md {
+      flex: 0 0 calc(chat__footer-height + (2 * #{$space-md}));
+    }
+    @include sm {
+      flex: 0 0 calc(chat__footer-height + (2 * #{$space-sm}));
+    }
+    @include xs {
+      flex: 0 0 calc(chat__footer-height + (2 * #{$space-xs}));
+    }
+    form,
+    mat-form-field {
+      width: 100%;
+    }
+  }
+
+  .chatMain {
+    &__msg {
+      // @include radius(5px);
+      padding: 8px;
+      &_outgoing {
+        background-color: $outgoingMsg;
+        margin-right: 40px;
+        @include radius(10px 12px 12px 0);
+      }
+      &_incoming {
+        background-color: $incomingMsg;
+        margin-left: 40px;
+        @include radius(12px 10px 0 12px);
+      }
+    }
+  }
+}

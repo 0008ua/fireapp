@@ -1,0 +1,187 @@
+<header class="header" fxLayout="row">
+  <div class="header__item" fxFlex.gt-sm="10" fxFlex.lt-md="100" fxLayoutAlign="start center"
+    fxLayoutAlign.lt-md="end center">Logo</div>
+  <div fxFlex fxHide.lt-md></div>
+
+  <div class="header__item" fxFlex.gt-sm="85" fxHide.lt-md fxLayoutAlign="start center">
+    <!-- home page -->
+    <nav *ngIf="url === '/'" fxFlex.gt-sm="75">
+      <ul class="nav nav_type_header">
+        <li class="nav__item mat-body-1 cursor-pointer" *ngFor="let section of sections; let i = index;"
+          [ngClass]="{'nav__item_active': elementOnScreen === 'section' + i}" (click)="scrollTo('section' + i)">
+          <span class="nav__icon">
+            <i [class]="section.icon"></i>
+          </span>
+          <span class="nav__text">
+            {{section.name | translate:section}}
+          </span>
+        </li>
+      </ul>
+    </nav>
+    <!-- not home page -->
+    <nav *ngIf="url != '/'" fxFlex.gt-sm="75">
+      <ul class="nav nav_type_header">
+        <li class="nav__item mat-body-1 cursor-pointer" (click)="navTo('/')">
+          <span class="nav__icon">
+            <i [class]="config.sections[0].icon"></i>
+          </span>
+          <span class="nav__text">
+            {{config.sections[0].name | translate:config.sections[0]}}
+          </span>
+        </li>
+      </ul>
+    </nav>
+
+    <div fxFlex fxHide.lt-md></div>
+    <nav fxFlex.gt-sm="25">
+      <ul class="nav nav_type_header">
+        <li class="nav__item mat-body-1 cursor-pointer" (click)="navTo('/feedback')">
+          <span class="nav__icon nav__icon_small">
+            <i class="fas fa-envelope fa-1x"></i>
+          </span>
+          <span class="nav__text">
+            Feedback
+          </span>
+        </li>
+
+        <li *ngIf="config.useTranslator" class="nav__item mat-body-1 cursor-pointer" (click)="switchLanguage()">
+          <span class="nav__icon nav__icon_small">
+            <i class="fas fa-globe fa-1x"></i>
+          </span>
+          <span class="nav__text">
+            {{language}}
+          </span>
+        </li>
+
+        <li *ngIf="user?.uid" class="nav__item mat-body-1 cursor-pointer" (click)="navTo('/user/profile')">
+          <span class="nav__icon nav__icon_small">
+            <img [src]="user.photoURL">
+            <!-- <i class="fas fa-globe fa-1x"></i> -->
+          </span>
+          <!-- <span class="nav__text">
+          {{ user.displayName }}
+        </span> -->
+        </li>
+        <li *ngIf="user?.uid" class="nav__item mat-body-1 cursor-pointer" (click)="signOut()">
+          <span class="nav__icon nav__icon_small">
+            <i class="fas fa-sign-out-alt fa-1x"></i>
+          </span>
+          <span class="nav__text">
+            Logout
+          </span>
+        </li>
+
+        <li *ngIf="!user?.uid" class="nav__item mat-body-1 cursor-pointer" (click)="googleSignin()">
+          <span class="nav__icon nav__icon_small">
+            <i class="fas fa-sign-in-alt fa-1x"></i>
+          </span>
+          <span class="nav__text">
+            Login
+          </span>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+</header>
+
+<aside class="aside" fxHide.gt-sm fxLayout="row" (click)="switchPopup()" (mouseenter)="showPopup(true)"
+  (mouseleave)="showPopup(false)">
+  <div class="aside__nav" [ngClass]="{'aside__nav_popup': isAsidePopup}">
+    <!-- <div > -->
+      <nav fxFlex *ngIf="url === '/'">
+
+        <ul class="nav nav_type_aside" >
+
+          <li class="nav__item mat-body-1 cursor-pointer" *ngFor="let section of sections; let i = index;"
+            [ngClass]="{'nav__item_active': elementOnScreen === 'section' + i}" (click)="scrollTo('section' + i)">
+            <!-- <span *ngIf="url === '/'"> -->
+            <span class="nav__icon">
+              <i [class]="section.icon"></i>
+            </span>
+
+            <span class="nav__text">
+              {{section.name | translate:section}}
+            </span>
+
+          </li>
+        </ul>
+      </nav>
+
+      <nav *ngIf="url != '/'">
+
+        <ul class="nav nav_type_aside" [ngClass]="{'nav_popup': isAsidePopup}">
+
+          <li class="nav__item mat-body-1 cursor-pointer" (click)="navTo('/')">
+            <span class="nav__icon">
+              <i [class]="config.sections[0].icon"></i>
+            </span>
+
+            <span class="nav__text">
+              {{config.sections[0].name | translate:config.sections[0]}}
+            </span>
+          </li>
+        </ul>
+      </nav>
+    <!-- </div> -->
+    <div fxFlex="5"></div>
+
+      <nav fxFlex>
+        <ul class="nav nav_type_aside" [ngClass]="{'nav_popup': isAsidePopup}">
+
+          <li class="nav__item mat-body-1 cursor-pointer" (click)="navTo('/feedback')">
+            <span class="nav__icon">
+              <i class="fas fa-envelope fa-2x"></i>
+            </span>
+            <span class="nav__text">
+              Feedback
+            </span>
+          </li>
+
+          <li class="nav__item mat-body-1 cursor-pointer" (click)="switchLanguage($event)">
+            <span class="nav__icon">
+              <i class="fas fa-globe fa-2x"></i>
+            </span>
+            <span class="nav__text">
+              {{language}}
+            </span>
+          </li>
+
+          <li *ngIf="user?.uid" class="nav__item mat-body-1 cursor-pointer" (click)="navTo('/user/profile')">
+            <span class="nav__icon">
+              <img [src]="user.photoURL">
+
+            </span>
+            <span class="nav__text">
+              {{user.displayName}}
+            </span>
+          </li>
+          <li *ngIf="user?.uid" class="nav__item mat-body-1 cursor-pointer" (click)="fireService.signOut()">
+            <span class="nav__icon">
+              <i class="fas fa-sign-out-alt fa-2x"></i>
+            </span>
+            <span class="nav__text">
+              Logout
+            </span>
+          </li>
+
+          <li *ngIf="!user?.uid" class="nav__item mat-body-1 cursor-pointer" (click)="fireService.googleSignin()">
+            <span class="nav__icon">
+              <i class="fas fa-sign-in-alt fa-2x"></i>
+            </span>
+            <span class="nav__text">
+              Login
+            </span>
+          </li>
+
+        </ul>
+      </nav>
+  </div>
+
+
+  <div class="aside__button" fxFlex="16px" fxFlexAlign="center" [ngClass]="{'aside__button_popup': isAsidePopup}">
+    <span>
+      <i class="fas" [ngClass]="asideButtonClass"></i>
+    </span>
+  </div>
+</aside>

@@ -1,0 +1,89 @@
+@import '~@angular/material/theming';
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:200,300,400|Montserrat:300,400|Roboto:300,400&subset=cyrillic');
+@import './mixins';
+@import './cssReset';
+
+// custom typography
+$mainFontFamily: "Roboto, sans-serif";
+
+$custom-typography: mat-typography-config(
+        $font-family: $mainFontFamily
+        );
+        
+@include angular-material-typography($custom-typography);
+@include mat-core($custom-typography);
+
+$config: mat-typography-config();
+
+// theming
+$mat-custom-primary: (
+    50 : #e9eaed,
+    100 : #c9cad2,
+    200 : #a5a7b4,
+    300 : #808396,
+    400 : #656980,
+    500 : #4a4e69,
+    600 : #434761,
+    700 : #3a3d56,
+    800 : #32354c,
+    900 : #22253b,
+    A100 : #838eff,
+    A200 : #5060ff,
+    A400 : #1d31ff,
+    A700 : #031aff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #ffffff,
+        A400 : #ffffff,
+        A700 : #ffffff,
+    )
+);
+
+$mat-custom-accent: (
+        50 : #f2f4f5,
+    100 : #dde4e5,
+    200 : #c7d2d4,
+    300 : #b1c0c2,
+    400 : #a0b3b5,
+    500 : #8fa5a8,
+    600 : #879da0,
+    700 : #7c9397,
+    800 : #728a8d,
+    900 : #60797d,
+    A100 : #eefcff,
+    A200 : #bcf5fe,
+    A400 : #88efff,
+    A700 : #6eecff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$dark-theme: mat-dark-theme(mat-palette($mat-custom-primary), mat-palette($mat-custom-accent), mat-palette($mat-red));
+$light-theme: mat-light-theme(mat-palette($mat-custom-primary), mat-palette($mat-custom-accent), mat-palette($mat-red));
+
+$main-theme: $light-theme;
+@include angular-material-theme($main-theme);

@@ -1,0 +1,19 @@
+@import './lightThemeStyles';
+
+// redefine styles - always dark theme components
+@mixin dark-theme-styles($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, accent);
+    $foreground: map-get($theme, foreground);
+    $background: map-get($theme, background);
+  
+   
+  // ..themes
+  }
+  
+@mixin dark-theme-components($theme) {
+    @include dark-theme-styles($theme);
+  }
+  
+@include dark-theme-components($dark-theme);

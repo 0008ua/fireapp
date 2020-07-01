@@ -1,0 +1,77 @@
+<div class="homepage">
+
+  <section id='section0' #scrollerMarker class="homepage__section homepage__section_start" appScrolling
+    (elementOnScreen)="onElementOnScreen('section0')">
+    <div class="section section_start">
+      <h1 class="section__header mat-display-2">{{'welcome' | translate}}</h1>
+      <p class="section__text mat-body-1">Some text about</p>
+      <div class="gallery" fxLayout="row wrap">
+        <div fxHide.lt-md fxFlex="5"></div>
+        <div class="gallery__item" fxFlex.lt-md="100" fxFlex="90" fxLayoutAlign="center center">
+          <img class="gallery__image" src="/assets/flyer.png" alt="flyer">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id='section1' #scrollerMarker class="homepage__section" appScrolling
+    (elementOnScreen)="onElementOnScreen('section1')">
+    <div class="section section_projects">
+      <h1 class="section__header mat-display-2">Syllabus</h1>
+      <p class="section__text mat-body-1">Some text</p>
+
+      <div class="section__gallery">
+        <div class="gallery" fxLayout="row wrap">
+          <div class="gallery__item" fxFlex.lt-md="100" fxFlex="50" fxLayoutAlign="center center">
+            <img class="gallery__image" [appOnScrollAnimation]="'fade'" src="/assets/001.jpg" alt="project1">
+          </div>
+
+          <div class="gallery__item" fxFlex.lt-md="100" fxFlex="50" fxLayoutAlign="center center">
+            <img class="gallery__image" [appOnScrollAnimation]="'fade'" src="/assets/002.jpg" alt="project2">
+          </div>
+
+          <div class="gallery__item" fxFlex.lt-md="100" fxFlex="50" fxLayoutAlign="center center">
+            <img class="gallery__image" [appOnScrollAnimation]="'fade'" src="/assets/003.jpg" alt="project5">
+          </div>
+          <div class="gallery__item" fxFlex.lt-md="100" fxFlex="50" fxLayoutAlign="center center">
+            <img class="gallery__image" [appOnScrollAnimation]="'fade'" src="/assets/003.jpg" alt="project5">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <section id='section2' #scrollerMarker class="homepage__section" appScrolling
+    (elementOnScreen)="onElementOnScreen('section2')">
+    <div class="section section_portfolio">
+      <h1 class="section__header mat-display-2">About</h1>
+      <p class="section__text mat-body-1">Some text about</p>
+      <div class="section__gallery">
+        <div class="gallery" fxLayout="row wrap">
+          <div fxFlex="25" fxShow fxHide.lt-md></div>
+          <div class="gallery__item" fxFlex.lt-md="100" fxFlex="50" fxLayoutAlign="center center">
+            <img class="gallery__image" [appOnScrollAnimation]="'slide'" src="/assets/004.jpg" alt="portfolio">
+          </div>
+          <div fxFlex="25" fxShow fxHide.lt-md></div>
+          <div fxFlex="25" fxShow fxHide.lt-md></div>
+          <div class="gallery__item" fxFlex.lt-md="100" fxFlex="50" fxLayoutAlign="center center">
+            <img class="gallery__image" [appOnScrollAnimation]="'slide'" src="/assets/004.jpg" alt="portfolio">
+          </div>
+          <div fxFlex="25" fxShow fxHide.lt-md></div>
+          <div fxFlex="25" fxShow fxHide.lt-md></div>
+          <div class="gallery__item" fxFlex.lt-md="100" fxFlex="50" fxLayoutAlign="center center">
+            <img class="gallery__image" [appOnScrollAnimation]="'slide'" src="/assets/004.jpg" alt="portfolio">
+          </div>
+          <div fxFlex="25" fxShow fxHide.lt-md></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id='section3' #scrollerMarker [appOnScrollAnimation]="'fade'" class="homepage__section" appScrolling
+    (elementOnScreen)="onElementOnScreen('section3')">
+    <div class="section section_contacts">
+      <h1 class="section__header mat-display-2">Contacts</h1>
+      <p class="section__text mat-body-1">Contacts: </p>
+    </div>
+  </section>
+</div>

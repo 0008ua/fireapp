@@ -1,0 +1,58 @@
+<div class="profile">
+<div class="container">
+
+  <div class="row" fxLayout="column" fxLayout.gt-xs="row">
+    <div fxFlex.gt-xs="10" fxFlex.gt-md="15"></div>
+
+    <div class="cell" fxFlex.gt-xs="80" fxFlex.gt-md="70">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Messages</mat-card-title>
+          <mat-card-subtitle>Subtitle</mat-card-subtitle>
+        </mat-card-header>
+        <!-- <img matCardImage src="Card wide image source"> -->
+        <mat-card-content>
+          <!-- {{messages | json}} -->
+          <div *ngFor="let message of messages">
+            {{message | json}}
+            <button mat-button (click)="onDelete(message.id)">Delete</button>
+          </div>
+
+        </mat-card-content>
+        <mat-card-actions *ngIf="messages.length" align="start">
+          <button mat-button (click)="prevPage()"
+            [disabled]="!messages || firstInCollectionFeedback?.id === messages[0].id">Previous</button>
+          <button mat-button (click)="nextPage()"
+            [disabled]="!messages || lastInCollectionFeedback?.id === messages[messages.length - 1].id">Next</button>
+        </mat-card-actions>
+        <mat-card-footer>
+          Footer
+        </mat-card-footer>
+      </mat-card>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row" fxLayout="column" fxLayout.gt-xs="row">
+    <div fxFlex.gt-xs="10" fxFlex.gt-md="25"></div>
+    <div class="cell" fxFlex.gt-xs="50" fxFlex.gt-md="70">
+      <div *ngIf="store.select('user') | async as store; else guest">
+        <!-- IF true -->
+        <h3>Howdy, {{ store.user.displayName }}</h3>
+        <img [src]="store.user.photoURL">
+        <p>UID: {{ store.user.uid }}</p>
+        <button (click)="signOut()">Logout</button>
+        <!-- ELSE template will replace this div -->
+      </div>
+      <!-- User NOT logged in -->
+      <ng-template #guest>
+        <h3>Howdy, GUEST</h3>
+        <p>Login to get started...</p>
+        <button (click)="googleSignin()">
+          <i class="fa fa-google"></i> Connect Google
+        </button>
+      </ng-template>
+    </div>
+  </div>
+</div>
+</div>
